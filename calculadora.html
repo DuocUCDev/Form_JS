@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora Simple</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Calculadora Simple 1.0</h1>
+    <form name="calculadora">
+      <input type="text" name="display" id="display" disabled />
+      <br />
+      <button type="button" onclick="agregarNumero('1')">1</button>
+      <button type="button" onclick="agregarNumero('2')">2</button>
+      <button type="button" onclick="agregarNumero('3')">3</button>
+      <button type="button" onclick="operacion('+')">+</button>
+      <br />
+      <button type="button" onclick="agregarNumero('4')">4</button>
+      <button type="button" onclick="agregarNumero('5')">5</button>
+      <button type="button" onclick="agregarNumero('6')">6</button>
+      <button type="button" onclick="operacion('-')">-</button>
+      <br />
+      <button type="button" onclick="agregarNumero('7')">7</button>
+      <button type="button" onclick="agregarNumero('8')">8</button>
+      <button type="button" onclick="agregarNumero('9')">9</button>
+      <button type="button" onclick="operacion('*')">*</button>
+      <br />
+      <button type="button" onclick="agregarNumero('0')">0</button>
+      <button type="button" onclick="calcular()">=</button>
+      <button type="button" onclick="limpiar()">C</button>
+      <button type="button" onclick="operacion('/')">/</button>
+    </form>
+
+    <script>
+      let operandoA = "";
+      let operandoB = "";
+      let operation = "";
+
+      function agregarNumero(num) {
+        if (operation === "") {
+          operandoA += num;
+          document.calculadora.display.value = operandoA;
+        } else {
+          operandoB += num;
+          document.calculadora.display.value = operandoB;
+        }
+      }
+
+      function operacion(op) {
+        if (operation === "") {
+          operation = op;
+        } else {
+          calcular();
+          operation = op;
+        }
+      }
+
+      function calcular() {
+        let resultado = 0;
+        switch (operation) {
+          case "+":
+            resultado = parseFloat(operandoA) + parseFloat(operandoB);
+            break;
+          case "-":
+            resultado = parseFloat(operandoA) - parseFloat(operandoB);
+            break;
+          case "*":
+            resultado = parseFloat(operandoA) * parseFloat(operandoB);
+            break;
+          case "/":
+            if (operandoB !== "0") {
+              resultado = parseFloat(operandoA) / parseFloat(operandoB);
+            } else {
+              alert("No se puede dividir por cero.");
+              resultado = "";
+            }
+            break;
+        }
+        operandoA = resultado;
+        operandoB = "";
+        operation = "";
+        document.calculadora.display.value = resultado;
+      }
+
+      function limpiar() {
+        operandoA = "";
+        operandoB = "";
+        operation = "";
+        document.calculadora.display.value = "";
+      }
+    </script>
+  </body>
+</html>
