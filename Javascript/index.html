@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Cambio de Fondo</title>
+    <style>
+        body{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Javascript - Cambio Color de Fondo</h1>
+    <button type="button" onclick="cambiarColor()">Cambia Color</button>
+    <br>
+    <br>
+    <h2 id="contador">0</h2>
+    <button type="button" onclick="aumentarTamaño()">Aumentar (+)</button>
+    <button type="button" onclick="dismunuirTamaño()">Disminuir (-)</button>
+    <script>
+        let contadorBase = 10;
+        function cambiarColor(){
+            console.log(generarColorAleatorio());
+            document.body.style.backgroundColor = generarColorAleatorio();
+        }
+
+        function generarColorAleatorio(){
+            const randomColor = () => Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+            return `#${randomColor()}${randomColor()}${randomColor()}`;
+        }
+
+        function aumentarTamaño(){
+            //contadorBase = contadorBase + 1; Todos son incrementadores.
+            //contadorBase += 1;
+            contadorBase ++;
+            actualizarDisplay();
+        }
+
+        function dismunuirTamaño(){
+            contadorBase --;
+            actualizarDisplay();
+        }
+
+        function actualizarDisplay(){
+            document.getElementById("contador").innerHTML = contadorBase;
+            //document.getElementById("contador").style.fontSize = `${contadorBase}px`;
+        }
+    </script>
+</body>
+</html>
